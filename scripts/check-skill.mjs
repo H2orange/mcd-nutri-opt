@@ -2,6 +2,10 @@
  * SKILL.md 格式校验。
  * Skill 结构约定：YAML frontmatter（name + description）+ Markdown 正文。
  *
+ * 必须兼容 CRLF——Windows 上 git 会把 LF 转成 CRLF，若正则写成 /^---\n/
+ * 会在 clone 后失效。本项目实测踩过这个坑：本地工作区是 LF 所以校验通过，
+ * 远程 clone 后直接报"缺少 frontmatter"。
+ *
  * 用法: node scripts/check-skill.mjs
  */
 import { readFileSync, existsSync } from 'node:fs'
@@ -23,9 +27,12 @@ if (!existsSync(FILE)) {
   process.exit(1)
 }
 
-const s = readFileSync(FILE, 'utf8')
+const raw = readFileSync(FILE, 'utf8')
+// 统一换行后再校验，避免 CRLF 造成误判
+const s = raw.replace(/\r\n/g, '\n')
 console.log(`=== SKILL.md 检查 ===`)
-console.log(`  大小: ${(s.length / 1024).toFixed(1)} KB`)
+console.log(`  大小: ${(raw.length / 1024).toFixed(1)} KB`)
+console.log(`  换行: ${raw.includes('\r\n') ? 'CRLF（已归一化后校验）' : 'LF'}`)
 
 // 1. frontmatter
 const fm = /^---\n([\s\S]*?)\n---\n/.exec(s)
