@@ -9,3 +9,7 @@ cache/
 *.log
 node_modules.lock
 package-lock.json
+
+# 报名文案不公开：仅用于提交官方 Issue 时复制粘贴
+ISSUE_SUBMISSION.md
+_backup/
