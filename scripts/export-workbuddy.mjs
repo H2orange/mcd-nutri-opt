@@ -15,7 +15,9 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = join(ROOT, 'workbuddy.md')
-const SESSION_DIR = 'C:/Users/xupengju/.workbuddy/projects/e-vibeCoding-McDonald'
+// 不硬编码用户目录：优先读环境变量，其次从 HOME 推导
+const WB_ROOT = process.env.WORKBUDDY_HOME || (process.env.USERPROFILE || process.env.HOME) + "/.workbuddy"
+const SESSION_DIR = join(WB_ROOT, 'projects', 'e-vibeCoding-McDonald')
 
 /** 定位本项目的会话文件（取最近修改的 .jsonl） */
 function locateSession() {
@@ -40,22 +42,81 @@ function locateSession() {
 }
 
 /**
- * 凭据脱敏 —— 必须做。
+ * 凭据与身份信息脱敏 —— 必须做。
  *
  * 官方 CONTEST_DECLARATION.md 的「信息安全声明」明确要求：
  * 参赛材料不得包含真实 Token、密钥、密码、账号凭证。
- * 而用户在对话中往往会直接粘贴 Token（本次开发即如此），
- * 若不过滤，导出的 workbuddy.md 会把凭据带进公开仓库。
+ * 而对话中往往会直接粘贴 Token 或身份信息（本次开发即如此），
+ * 若不过滤，导出的 workbuddy.md 会把它们带进公开仓库。
+ *
+ * 注意：不能只脱敏 Token —— 用户名、中文姓名、手机号同样属于个人身份信息，
+ * 且一旦提交进 git 历史就很难彻底清除（需重写历史）。
  */
 function redactSecrets(text) {
   let t = text
 
-  // 形如 32 位以上无分隔的 token（麦当劳 MCP Token 为 32 位）
-  t = t.replace(/\b[A-Za-z0-9_-]{32,}\b/g, (m) => '[REDACTED_TOKEN]')
+  // 32 位以上无分隔的 token（麦当劳 MCP Token 为 32 位）
+  t = t.replace(/\b[A-Za-z0-9_-]{32,}\b/g, '[REDACTED_TOKEN]')
 
-  // 带前缀的密钥
-  t = t.replace(/\b(Bearer|token|Token|TOKEN|apikey|api_key|secret)\s*[:=]?\s*[A-Za-z0-9._-]{16,}/g, '$1 [REDACTED]')
+  // 手机号（含带区号/分隔符的各种写法）
+  // 注意：必须在邮箱脱敏之前处理，否则形如 [REDACTED_PHONE]@example.com
+  // 的组合会残留域名后缀
+  t = t.replace(/\b1[3-9]\d[-\s]?\d{4}[-\s]?\d{4}\b/g, '[REDACTED_PHONE]')
 
+  // 邮箱：排除 GitHub 隐私邮箱（那是推荐做法，保留）
+  t = t.replace(/\b[\w.+-]+@(?!users\.noreply\.github\.com)[\w-]+\.[\w.]+\b/g, (m) => {
+    if (m.includes('[REDACTED')) return m
+    return '[REDACTED_EMAIL]'
+  })
+
+  // 残留的邮箱域名后缀（脱敏后可能剩下裸域名）
+  t = t.replace(/\[REDACTED_PHONE\]@[\w.-]+/g, '[REDACTED_EMAIL]')
+  t = t.replace(/@[a-z0-9-]+\.(com|cn|net|org|io|cc)\b(?![a-z])/gi, (m) => {
+    // 保留 noreply 域名
+    if (m.includes('users.noreply')) return m
+    return '[REDACTED_DOMAIN]'
+  })
+
+  // Windows 用户名路径：C:/Users/<name>/ 或 C:\Users\<name>\
+  t = t.replace(/([A-Za-z]:[/\\])Users[/\\]([A-Za-z0-9._-]+)([/\\])/g, '$1Users[/\\][REDACTED_USER]$3')
+
+  // 裸的中文姓名难以自动识别，这里只处理显式的"姓名：xxx"标注形式
+  t = t.replace(/(姓\s*名|真实姓名)\s*[:：]\s*[\u4e00-\u9fa5]{2,4}/g, '$1：[REDACTED_NAME]')
+
+  return t
+}
+
+/**
+ * 已知身份值精确替换
+ *
+ * 通用正则无法可靠识别裸文本形式的姓名与 Windows 用户名（如对话中直接写出
+ * 某个姓名），因此需要维护一份已知敏感值清单。
+ *
+ * 配置位置：.env 的 REDACT_VALUES（逗号分隔）。该文件已被 .gitignore 排除，
+ * **不要把敏感值写进本代码** —— 注释和字面量都会进git 历史。
+ */
+function readEnvValues() {
+  const p = join(ROOT, '.env')
+  if (!existsSync(p)) return ''
+  const line = readFileSync(p, 'utf8')
+    .split('\n')
+    .find((l) => l.startsWith('REDACT_VALUES='))
+  return line ? line.slice('REDACT_VALUES='.length).trim() : ''
+}
+
+const KNOWN_SENSITIVE = readEnvValues()
+  .split(',')
+  .map((s) => s.trim())
+  .filter((s) => s.length >= 3)
+
+function redactKnownValues(text) {
+  let t = text
+  for (const v of KNOWN_SENSITIVE) {
+    if (!v || v.length < 3) continue
+    // 转义正则特殊字符
+    const escaped = v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    t = t.replace(new RegExp(escaped, 'g'), '[REDACTED]')
+  }
   return t
 }
 
@@ -76,8 +137,9 @@ function cleanText(text, role) {
   // 去掉注入的项目结构快照（很长且与对话无关）
   t = t.replace(/<project_layout>[\s\S]*?<\/project_layout>/g, '')
 
-  // 脱敏凭据（必须在所有清理之后、写出之前）
+  // 脱敏凭据与身份信息（必须在所有清理之后、写出之前）
   t = redactSecrets(t)
+  t = redactKnownValues(t)
 
   return t.trim()
 }
