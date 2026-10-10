@@ -7,6 +7,29 @@
 
 ---
 
+## 三种用法
+
+**① 当 Skill 用（最省事）**
+
+本仓库带[`SKILL.md`](SKILL.md)，装到 WorkBuddy 后直接说人话：
+
+> 「今天 30 块能吃到多少蛋白？」
+> 「预算 60 以内要55g 蛋白」
+> 「不要汉堡，还有什么推荐」
+
+**② 命令行**
+
+```bash
+git clone https://github.com/H2orange/mcd-nutri-opt && cd mcd-nutri-opt
+npm run demo      # 免 Token，clone 即可运行
+```
+
+**③ 接入 WorkBuddy**
+
+按官方指引把麦当劳 MCP 配成连接器，本项目即可调用真实门店菜单与到手价完成实时求解。
+
+---
+
 ## 为什么做这个
 
 健身和吃麦当劳是对立的。打开 App 想知道"今天 30 块能吃到多少蛋白"，得自己翻菜单、比价格、算热量——没人愿意。
@@ -174,6 +197,7 @@ node --test "test/solver.test.mjs"
 ## 项目结构
 
 ```
+SKILL.md              WorkBuddy Skill 定义（支持说人话调用）
 src/
   nutrition.mjs     营养文本解析（处理 description 混入商品名的坑）
   matcher.mjs       四级降级对齐引擎（L1/L2/L3/L4）
@@ -185,16 +209,18 @@ data/
   nutrition.json    内置营养数据集（158 条）
 assets/             配图（由脚本从求解器实时产出）
 docs/
-  mcp-data-notes.md MCP 数据结构实测笔记（含全部踩坑记录）
-  data-alignment.md 语义鸿沟与降级链设计说明
+  COMPLIANCE_CHECKLIST.md 参赛合规自检清单
+  mcp-data-notes.md       MCP 数据结构实测笔记（含全部踩坑记录）
+  data-alignment.md       语义鸿沟与降级链设计说明
 test/
-  solver.test.mjs   24 个单元测试
+  solver.test.mjs   27 个单元测试
 scripts/
   probe.mjs         MCP 探针：拉取工具清单
   call.mjs          通用 Tool 调用器
   build-nutrition.mjs 营养数据集构建与校验
   gen-figures.mjs   配图生成（数据来自求解器，非手写）
   check-figures.mjs 配图静态检查
+  check-skill.mjs   SKILL.md 格式校验
   export-workbuddy.mjs 导出 WorkBuddy 对话上下文（自动脱敏）
 ```
 
@@ -203,6 +229,7 @@ scripts/
 ```bash
 node scripts/gen-figures.mjs
 node scripts/check-figures.mjs   # 检查出界、箭头长度、字号等
+node scripts/check-skill.mjs     # 检查 SKILL.md 格式
 ```
 
 ## 设计取舍

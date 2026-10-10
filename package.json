@@ -11,6 +11,8 @@
     "test": "node --test \"test/solver.test.mjs\"",
     "figures": "node scripts/gen-figures.mjs && node scripts/check-figures.mjs",
     "check:figures": "node scripts/check-figures.mjs",
+    "check:skill": "node scripts/check-skill.mjs",
+    "check": "node scripts/check-skill.mjs && node scripts/check-figures.mjs && node --test \"test/solver.test.mjs\"",
     "build:nutrition": "node scripts/build-nutrition.mjs",
     "export:workbuddy": "node scripts/export-workbuddy.mjs",
     "probe": "node scripts/probe.mjs"
