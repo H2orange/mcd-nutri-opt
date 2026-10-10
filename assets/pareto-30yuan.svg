@@ -2,7 +2,7 @@
   <rect width="900" height="540" fill="#FFFFFF"/>
 
   <text x="76" y="30" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="19" font-weight="500" fill="#2C2C2A">30 元预算下的帕累托前沿</text>
-  <text x="76" y="50" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#5F5E5A">约束：热量 ≤ 900 kcal　枚举 539 组合 → 可行 83 → 前沿 7　耗时 7ms</text>
+  <text x="76" y="50" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#5F5E5A">约束：热量 ≤ 900 kcal　枚举 539 组合 → 可行 83 → 前沿 7　耗时 8ms</text>
 
   <!-- 网格 -->
   <line x1="76" y1="448.0" x2="860" y2="448.0" stroke="#D3D1C7" stroke-width="1"/>

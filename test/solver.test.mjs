@@ -113,6 +113,41 @@ test('Solver: 包含关键词双向匹配', () => {
   assert.deepEqual(s.filtered.map((i) => i.name), ['中薯条'])
 })
 
+test('Solver: 排除汉堡必须命中巨无霸（回归）', () => {
+  // 关键回归：巨无霸名字里既无"汉堡"也无"堡"字，
+  // 早期实现用独立同义词组时漏了它，导致 `--exclude 汉堡` 反手推荐巨无霸。
+  const items = [
+    ...SAMPLE,
+    { code: 'g', name: '巨无霸', price: 22.5, energyKcal: 513, protein: 27, fat: 26, carbohydrate: 42, sodium: 961 },
+    { code: 'h', name: '板烧鸡腿堡', price: 21.5, energyKcal: 391, protein: 23, fat: 17, carbohydrate: 35, sodium: 1041 },
+  ]
+  const s = new Solver(items, { budget: 100, exclude: ['汉堡'] })
+  const names = s.filtered.map((i) => i.name)
+  for (const burger of ['巨无霸', '麦辣鸡腿汉堡', '板烧鸡腿堡']) {
+    assert.ok(!names.includes(burger), `${burger} 应被"汉堡"排除`)
+  }
+  assert.ok(names.includes('中薯条'), '非汉堡商品应保留')
+})
+
+test('Solver: 排除品类不应误伤其他品类', () => {
+  const s = new Solver(SAMPLE, { budget: 100, exclude: ['饮料'] })
+  const names = s.filtered.map((i) => i.name)
+  assert.ok(!names.includes('无糖可口可乐中杯'), '可乐应被排除')
+  assert.ok(names.includes('麦辣鸡腿汉堡'), '汉堡不应被"饮料"误伤')
+  assert.ok(names.includes('中薯条'), '小食不应被误伤')
+})
+
+test('Solver: 排除巨无霸只影响该单品', () => {
+  const items = [
+    ...SAMPLE,
+    { code: 'g', name: '巨无霸', price: 22.5, energyKcal: 513, protein: 27, fat: 26, carbohydrate: 42, sodium: 961 },
+  ]
+  const s = new Solver(items, { budget: 100, exclude: ['巨无霸'] })
+  const names = s.filtered.map((i) => i.name)
+  assert.ok(!names.includes('巨无霸'))
+  assert.ok(names.includes('板烧鸡腿堡'), '其他汉堡不应被"巨无霸"误伤')
+})
+
 test('Solver: 超出能力的约束返回不可行而非死循环', () => {
   const s = new Solver(SAMPLE, { budget: 5, minProtein: 99 })
   const r = s.solve()

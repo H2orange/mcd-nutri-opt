@@ -10,29 +10,14 @@
  */
 
 import { normalizeName } from './nutrition.mjs'
-import { guessCategory } from './categories.mjs'
+import { guessCategory, matchCategories } from './categories.mjs'
 
 export { guessCategory }
 
 /**
- * 品类同义词组：让「排除汉堡」能命中「板烧鸡腿堡」这类不含"汉堡"二字的命名。
  * 麦当劳同一品类在菜单上有多种叫法，而用户心智中的"汉堡"是品类概念。
- * 每个数组内的词互为同义，用户说其中任意一个就排除整组。
+ * 品类定义统一维护在 categories.mjs，此处不再重复定义，避免两处漂移。
  */
-const CATEGORY_SYNONYMS = [
-  ['汉堡', '鸡腿堡', '牛堡', '鱼堡', '麦满分', '吉士汉堡'],
-  ['小食', '薯条', '薯饼', '玉米杯', '鸡翅', '脆汁鸡'],
-  ['饮料', '可乐', '雪碧', '咖啡', '牛奶', '豆浆', '红茶'],
-  ['甜品', '新地', '派', '麦旋风', '冰淇淋', '雪冰'],
-  ['酱料', '酱', '沙拉酱'],
-  ['套餐', '件套', '随心配', '分享餐'],
-]
-
-/** 某关键词是否命中某同义词组 */
-function hitsSynonymGroup(keyword, group) {
-  const k = normalizeName(keyword)
-  return group.some((syn) => k.includes(syn) || syn.includes(k))
-}
 
 /**
  * @typedef {object} Item
@@ -87,19 +72,16 @@ export class Solver {
     const ex = this.c.exclude.map(normalizeName).filter(Boolean)
     const inc = this.c.includeKeywords?.map(normalizeName).filter(Boolean) ?? null
 
-    // 关键词命中判定：子串双向包含 + 同义词组扩展
+    // 白名单走子串双向包含即可；黑名单需支持品类级排除（见 shouldExclude）
     const hit = (norm, keys) => keys.some((k) => norm.includes(k) || k.includes(norm))
 
-    // 用户说"汉堡"时，应排除整个汉堡品类（含"板烧鸡腿堡"这类不含该二字的命名）
-    const exGroups = CATEGORY_SYNONYMS.filter((g) => g.some((syn) => ex.some((k) => hitsSynonymGroup(k, [syn]))))
-    const hitExcludedGroup = (norm) =>
-      exGroups.some((g) => g.some((syn) => norm.includes(syn) || syn.includes(norm)))
+    // 在售商品名集合：用于区分"排除整个品类"与"排除某个单品"
+    const itemNameSet = new Set(items.map((i) => normalizeName(i.name)))
 
     return items.filter((it) => {
       const n = normalizeName(it.name)
       if (!n) return false
-      if (hit(n, ex)) return false
-      if (hitExcludedGroup(n)) return false
+      if (shouldExclude(n, ex, itemNameSet)) return false
       if (inc && !hit(n, inc)) return false
       if (it.price <= 0) return false
       return true
@@ -302,6 +284,39 @@ function sumNutrition(acc) {
     }),
     { energyKcal: 0, protein: 0, fat: 0, carbohydrate: 0, sodium: 0 },
   )
+}
+
+/**
+ * 排除逻辑：区分「品类意图」与「单品意图」。
+ *
+ * 用户说「不要汉堡」——汉堡是品类词，应排除整个 burger 品类，
+ *   包括不含"汉堡"二字的「巨无霸」「板烧鸡腿堡」（早期漏掉巨无霸是 bug）。
+ * 用户说「不要巨无霸」——巨无霸是具体单品，只排除该单品，
+ *   不能连带排除其他汉堡（否则「巨无霸」既当品类又当单品，语义自相矛盾）。
+ *
+ * 判定依据：品类关键词表里同时包含品类词与代表单品名，
+ * 因此若排除词**本身就是一个在售商品名**，按单品意图处理；
+ * 否则按品类意图处理。
+ */
+function shouldExclude(nameNorm, excludeKeywords, itemNameSet) {
+  if (excludeKeywords.length === 0) return false
+
+  for (const k of excludeKeywords) {
+    // 直接子串命中（含反向，"薯条"命中"中薯条"）
+    if (nameNorm.includes(k) || k.includes(nameNorm)) return true
+  }
+
+  for (const k of excludeKeywords) {
+    // 单品意图：排除词本身就是某个在售商品名 → 只排除该单品（上面的子串匹配已处理）
+    if (itemNameSet.has(k)) continue
+
+    // 品类意图：排除词能唯一映射到某个品类 → 排除该品类全部商品
+    const hitCats = matchCategories(k)
+    if (hitCats.length !== 1) continue
+    if (matchCategories(nameNorm).includes(hitCats[0])) return true
+  }
+
+  return false
 }
 
 const round2 = (n) => Math.round(n * 100) / 100

@@ -20,15 +20,15 @@
   <path d="M 528 107 L 545 107" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
   <rect x="374" y="74" width="152" height="66" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
   <text x="450" y="100" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="14" font-weight="500" fill="#3C3489" text-anchor="middle" dominant-baseline="central">DFS 枚举</text>
-  <text x="450" y="120" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#534AB7" text-anchor="middle" dominant-baseline="central">8,818 组合</text>
+  <text x="450" y="120" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#534AB7" text-anchor="middle" dominant-baseline="central">8,228 组合</text>
   <path d="M 703 107 L 720 107" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
   <rect x="549" y="74" width="152" height="66" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
   <text x="625" y="100" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="14" font-weight="500" fill="#633806" text-anchor="middle" dominant-baseline="central">约束过滤</text>
-  <text x="625" y="120" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#854F0B" text-anchor="middle" dominant-baseline="central">519 可行</text>
+  <text x="625" y="120" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#854F0B" text-anchor="middle" dominant-baseline="central">263 可行</text>
   
   <rect x="724" y="74" width="152" height="66" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
   <text x="800" y="100" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="14" font-weight="500" fill="#27500A" text-anchor="middle" dominant-baseline="central">帕累托前沿</text>
-  <text x="800" y="120" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#3B6D11" text-anchor="middle" dominant-baseline="central">10 解</text>
+  <text x="800" y="120" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#3B6D11" text-anchor="middle" dominant-baseline="central">7 解</text>
 
-  <text x="24" y="232" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#5F5E5A">实测耗时 43ms（南京新百门店，2026-10）</text>
+  <text x="24" y="232" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#5F5E5A">实测耗时 42ms（南京新百门店，2026-10）</text>
 </svg>
