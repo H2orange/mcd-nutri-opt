@@ -39,6 +39,20 @@
 对比同一天同一门店的严格品类去重模式（52.9 元 / 蛋白 55 g），**本项目自动选择了更优解**
 并标注了策略来源。
 
+### 30 元预算下的完整权衡曲线
+
+求解器输出的不是一个答案，而是一条**帕累托前沿**——每个点都是互不支配的解。
+这张图回答了「同样蛋白最少花多少钱」和「同样预算最多能吃多少蛋白」两个不同问题：
+
+![30 元预算下的帕累托前沿](assets/pareto-30yuan.svg)
+
+实线上的每一步都是一次权衡：要更多蛋白就得加钱，没有免费的提升。
+数据由 `npm run demo -- --budget 30 --kcal 900 --protein 25` 实时产出。
+
+### 求解流程
+
+![求解流程](assets/solver-pipeline.svg)
+
 ## 三个技术要点
 
 ### 1. 菜单与营养表的语义鸿沟：命中率 15% → 79%
@@ -57,6 +71,12 @@
 
 L3 是关键。MCP Server 的 `query-meal-detail` 已经标注了每个套餐的默认搭配，
 所以拆解是精确的，不需要猜测。
+
+实测南京新百门店 83 项菜单的匹配分布：
+
+![四级降级对齐命中率](assets/match-breakdown.svg)
+
+L3 贡献了约 40 个百分点——**没有套餐拆解，命中率就上不了 70%**。
 
 ### 2. 帕累托前沿，不是单点最优
 
@@ -148,6 +168,7 @@ src/
   cli.mjs           命令行入口
 data/
   nutrition.json    内置营养数据集（158 条）
+assets/             配图（由脚本从求解器实时产出）
 docs/
   mcp-data-notes.md MCP 数据结构实测笔记（含全部踩坑记录）
   data-alignment.md 语义鸿沟与降级链设计说明
@@ -157,6 +178,16 @@ scripts/
   probe.mjs         MCP 探针：拉取工具清单
   call.mjs          通用 Tool 调用器
   build-nutrition.mjs 营养数据集构建与校验
+  gen-figures.mjs   配图生成（数据来自求解器，非手写）
+  check-figures.mjs 配图静态检查
+  export-workbuddy.mjs 导出 WorkBuddy 对话上下文（自动脱敏）
+```
+
+配图不是手绘的，`npm run figures` 会用求解器实时重算并重新生成，改了约束图也会跟着变：
+
+```bash
+node scripts/gen-figures.mjs
+node scripts/check-figures.mjs   # 检查出界、箭头长度、字号等
 ```
 
 ## 设计取舍

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="900" height="540" role="img" aria-label="30元预算下的帕累托前沿">
+  <rect width="900" height="540" fill="#FFFFFF"/>
+
+  <text x="76" y="30" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="19" font-weight="500" fill="#2C2C2A">30 元预算下的帕累托前沿</text>
+  <text x="76" y="50" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#5F5E5A">约束：热量 ≤ 900 kcal　枚举 539 组合 → 可行 83 → 前沿 7　耗时 7ms</text>
+
+  <!-- 网格 -->
+  <line x1="76" y1="448.0" x2="860" y2="448.0" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="76" y1="335.1" x2="860" y2="335.1" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="76" y1="222.1" x2="860" y2="222.1" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="76" y1="109.2" x2="860" y2="109.2" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="76.0" y1="64" x2="76.0" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="141.3" y1="64" x2="141.3" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="206.7" y1="64" x2="206.7" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="272.0" y1="64" x2="272.0" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="337.3" y1="64" x2="337.3" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="402.7" y1="64" x2="402.7" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="468.0" y1="64" x2="468.0" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="533.3" y1="64" x2="533.3" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="598.7" y1="64" x2="598.7" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="664.0" y1="64" x2="664.0" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="729.3" y1="64" x2="729.3" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="794.7" y1="64" x2="794.7" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+  <line x1="860.0" y1="64" x2="860.0" y2="448" stroke="#D3D1C7" stroke-width="1"/>
+
+  <!-- 坐标轴 -->
+  <line x1="76" y1="448" x2="860" y2="448" stroke="#888780" stroke-width="1"/>
+  <line x1="76" y1="64" x2="76" y2="448" stroke="#888780" stroke-width="1"/>
+
+  <!-- 坐标标签 -->
+  <text x="64" y="448.0" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="end" dominant-baseline="central">23</text>
+  <text x="64" y="335.1" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="end" dominant-baseline="central">28</text>
+  <text x="64" y="222.1" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="end" dominant-baseline="central">33</text>
+  <text x="64" y="109.2" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="end" dominant-baseline="central">38</text>
+  <text x="76.0" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">20</text>
+  <text x="141.3" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">21</text>
+  <text x="206.7" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">22</text>
+  <text x="272.0" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">23</text>
+  <text x="337.3" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">24</text>
+  <text x="402.7" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">25</text>
+  <text x="468.0" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">26</text>
+  <text x="533.3" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">27</text>
+  <text x="598.7" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">28</text>
+  <text x="664.0" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">29</text>
+  <text x="729.3" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">30</text>
+  <text x="794.7" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">31</text>
+  <text x="860.0" y="468" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">32</text>
+  <text x="468" y="482" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#2C2C2A" text-anchor="middle">合计花费（元）</text>
+  <text x="20" y="256" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#2C2C2A" text-anchor="middle" transform="rotate(-90 20 256)">蛋白质量（g）</text>
+
+  <!-- 帕累托阶梯线 -->
+  <path d="M 206.7 357.6 L 272.0 357.6 L 272.0 335.1 L 337.3 335.1 L 337.3 312.5 L 533.3 312.5 L 533.3 289.9 L 598.7 289.9 L 598.7 244.7 L 664.0 244.7 L 664.0 222.1 L 729.3 222.1 L 729.3 154.4" fill="none" stroke="#378ADD" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- 最省 vs 最高蛋白：参考线 -->
+  <line x1="206.7" y1="357.6" x2="206.7" y2="448" stroke="#639922" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="729.3" y1="154.4" x2="860" y2="154.4" stroke="#EF9F27" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- 端点就地标注（只标数字，不标长文字，避免出界） -->
+  <text x="218.7" y="347.6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" fill="#27500A">22元 / 27g　最省</text>
+  <text x="717.3" y="142.4" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" fill="#633806" text-anchor="end">最高蛋白 30元 / 36g</text>
+
+  <!-- 数据点 -->
+  <circle cx="206.7" cy="357.6" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+  <circle cx="272.0" cy="335.1" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+  <circle cx="337.3" cy="312.5" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+  <circle cx="533.3" cy="289.9" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+  <circle cx="598.7" cy="244.7" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+  <circle cx="664.0" cy="222.1" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+  <circle cx="729.3" cy="154.4" r="6" fill="#FFFFFF" stroke="#185FA5" stroke-width="2.5"/>
+
+  <!-- 底部说明卡片：把长文字放这里，不与数据区重叠 -->
+  <rect x="76" y="486" width="784" height="44" rx="8" fill="#E6F1FB"/>
+  <text x="90" y="504" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" font-weight="500" fill="#0C447C">线上每个点都是互不支配的解——不存在另一个方案能同时更便宜且蛋白更高</text>
+  <text x="90" y="522" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#2C2C2A">最省解：麦麦脆汁鸡-琵琶腿 + 优品豆浆小杯　　最高蛋白解：原味板烧鸡腿麦满分 + 麦麦脆汁鸡-琵琶腿</text>
+</svg>

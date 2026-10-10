@@ -9,7 +9,10 @@
     "solve": "node src/cli.mjs",
     "live": "node src/cli.mjs --live",
     "test": "node --test \"test/solver.test.mjs\"",
+    "figures": "node scripts/gen-figures.mjs && node scripts/check-figures.mjs",
+    "check:figures": "node scripts/check-figures.mjs",
     "build:nutrition": "node scripts/build-nutrition.mjs",
+    "export:workbuddy": "node scripts/export-workbuddy.mjs",
     "probe": "node scripts/probe.mjs"
   },
   "engines": {

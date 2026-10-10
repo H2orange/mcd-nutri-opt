@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="四级降级对齐命中率">
+  <rect width="900" height="300" fill="#FFFFFF"/>
+
+  <text x="76" y="30" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="19" font-weight="500" fill="#2C2C2A">菜单 × 营养表：命中率 79%</text>
+  <text x="76" y="50" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#5F5E5A">南京新百门店 1990346　共探测 83 项，剔除非食品 1 项后按82 项计算命中率（直接名称匹配仅 43%）</text>
+
+  <rect x="76.0" y="62" width="286.8" height="44" fill="#C0DD97"/>
+    <text x="219.4" y="124" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" fill="#27500A" text-anchor="middle">30</text>
+  <rect x="362.8" y="62" width="47.8" height="44" fill="#9FE1CB"/>
+    <text x="386.7" y="124" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" fill="#085041" text-anchor="middle">5</text>
+  <rect x="410.6" y="62" width="286.8" height="44" fill="#B5D4F4"/>
+    <text x="554.0" y="124" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" fill="#0C447C" text-anchor="middle">30</text>
+  <rect x="697.5" y="62" width="162.5" height="44" fill="#D3D1C7"/>
+    <text x="778.7" y="124" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" fill="#2C2C2A" text-anchor="middle">17</text>
+
+  <rect x="76" y="62" width="784" height="44" fill="none" stroke="#D3D1C7" stroke-width="1"/>
+
+  <!-- 剔除段示意 -->
+  <text x="468" y="84" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="13" fill="#2C2C2A" text-anchor="middle" dominant-baseline="central">L3 套餐拆解贡献最大</text>
+
+  <rect x="76" y="276" width="12" height="12" rx="3" fill="#639922"/>
+    <text x="94" y="282" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#2C2C2A">L1 精确匹配 30</text>
+  <rect x="198" y="276" width="12" height="12" rx="3" fill="#1D9E75"/>
+    <text x="216" y="282" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#2C2C2A">L2 双向包含 5</text>
+  <rect x="312" y="276" width="12" height="12" rx="3" fill="#378ADD"/>
+    <text x="330" y="282" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#2C2C2A">L3 套餐拆解 30</text>
+  <rect x="434" y="276" width="12" height="12" rx="3" fill="#888780"/>
+    <text x="452" y="282" font-family="system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#2C2C2A">未解析 17</text>
+</svg>
