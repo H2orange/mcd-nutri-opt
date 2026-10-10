@@ -1,0 +1,18 @@
+{
+  "name": "mcd-nutri-opt",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "麦麦最优解 — 基于麦当劳MCP 的约束求解型点餐助手",
+  "scripts": {
+    "demo": "node src/cli.mjs --budget 30 --kcal 900 --protein 30",
+    "solve": "node src/cli.mjs",
+    "live": "node src/cli.mjs --live",
+    "test": "node --test \"test/solver.test.mjs\"",
+    "build:nutrition": "node scripts/build-nutrition.mjs",
+    "probe": "node scripts/probe.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
