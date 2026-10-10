@@ -94,11 +94,26 @@ L3 贡献了约 40 个百分点——**没有套餐拆解，命中率就上不�
 
 ## 快速开始
 
-### 离线体验（无需 Token）
+### 环境要求
+
+| 项 | 要求 |
+|---|---|
+| Node.js | **≥ 20**（用到了原生 fetch 与 `node:test`） |
+| 运行时依赖 | **无**，无需 `npm install` |
+| MCP Token | 仅在线模式需要；离线体验与单元测试都不需要 |
+
+### 安装
 
 ```bash
 git clone https://github.com/H2orange/mcd-nutri-opt
 cd mcd-nutri-opt
+```
+
+无需安装依赖——本项目零运行时依赖，Node ≥20 直接可跑。
+
+### 使用示例：离线体验（无需 Token）
+
+```bash
 npm run demo
 ```
 
@@ -108,14 +123,14 @@ npm run demo
 # 预算 30、热量 900、蛋白至少 30g
 node src/cli.mjs --budget 30 --kcal 900 --protein 30
 
-# 排除整个汉堡品类（会自动命中"板烧鸡腿堡"这类不含"汉堡"二字的命名）
+# 排除整个汉堡品类（会自动命中"巨无霸""板烧鸡腿堡"这类不含"汉堡"二字的命名）
 node src/cli.mjs --budget 30 --protein 20 --exclude 汉堡
 
 # 查看求解策略说明
 node src/cli.mjs --budget 30 --kcal 900 --protein 30 --explain
 ```
 
-### 在线模式（真实门店数据与价格）
+### 使用示例：在线模式（真实门店数据与价格）
 
 ```bash
 #1. 申请 Token：https://open.mcd.cn/mcp
